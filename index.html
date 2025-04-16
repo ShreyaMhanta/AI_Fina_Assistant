@@ -1,0 +1,350 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>FinAI - Smart Investing Assistant</title>
+  <style>
+    /* Global Styles */
+    body {
+      margin: 0;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      line-height: 1.6;
+      color: #333;
+      background-color: #f8f9fa;
+    }
+
+    /* Navbar Styles */
+    .navbar {
+      background-color: #2c3e50;
+      color: white;
+      padding: 15px 0;
+      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+    }
+
+    .navbar-container {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 20px;
+    }
+
+    .navbar-logo {
+      font-size: 1.5em;
+      font-weight: bold;
+      color: white;
+      text-decoration: none;
+      display: flex;
+      align-items: center;
+    }
+
+    .navbar-logo img {
+      height: 30px;
+      margin-right: 10px;
+    }
+
+    .navbar-menu {
+      list-style: none;
+      display: flex;
+      margin: 0;
+      padding: 0;
+    }
+
+    .navbar-item {
+      position: relative;
+      margin: 0 15px;
+    }
+
+    .navbar-link {
+      color: white;
+      text-decoration: none;
+      padding: 8px 12px;
+      border-radius: 4px;
+      transition: all 0.3s ease;
+      font-weight: 500;
+      display: inline-block;
+    }
+
+    .navbar-link:hover {
+      background-color: #34495e;
+      color: #f8f9fa;
+    }
+
+    /* Dropdown Styles */
+    .dropdown-content {
+      display: none;
+      position: absolute;
+      background-color: #34495e;
+      min-width: 160px;
+      box-shadow: 0px 8px 16px rgba(0, 0, 0, 0.2);
+      z-index: 1001;
+      border-radius: 4px;
+      top: 100%;
+      left: 0;
+    }
+
+    .dropdown-content a {
+      color: white;
+      padding: 10px 16px;
+      text-decoration: none;
+      display: block;
+      transition: background-color 0.3s;
+    }
+
+    .dropdown-content a:hover {
+      background-color: #3e5871;
+    }
+
+    .navbar-item:hover .dropdown-content {
+      display: block;
+    }
+
+    /* Main Content Styles */
+    .main-content {
+      min-height: calc(100vh - 180px);
+      padding: 40px 20px;
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+
+    /* Chat Button Styles */
+    .chat-button-container {
+      text-align: center;
+      margin: 50px 0 0;
+    }
+
+    .chat-button {
+      background-color: #3498db;
+      color: white;
+      border: none;
+      padding: 20px 60px;
+      font-size: 24px;
+      border-radius: 50px;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      box-shadow: 0 4px 15px rgba(52, 152, 219, 0.3);
+      font-weight: 600;
+    }
+
+    .chat-button:hover {
+      background-color: #2980b9;
+      transform: translateY(-3px);
+      box-shadow: 0 6px 20px rgba(52, 152, 219, 0.4);
+    }
+
+    /* Highlight Container Styles */
+    .container {
+      text-align: center;
+      padding: 40px;
+      background: white;
+      border-radius: 20px;
+      box-shadow: 0 8px 30px rgba(0, 0, 0, 0.08);
+      animation: fadeInUp 1s ease-out;
+      max-width: 600px;
+      margin: 40px auto 0;
+    }
+
+    .headline {
+      font-size: 2.5rem;
+      color: #2c3e50;
+      margin-bottom: 20px;
+    }
+
+    .subtext {
+      font-size: 1.2rem;
+      color: #555;
+    }
+
+    /* Footer Styles */
+    .footer {
+      background-color: #2c3e50;
+      color: white;
+      padding: 40px 0 20px;
+    }
+
+    .footer-container {
+      display: flex;
+      justify-content: space-between;
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 20px;
+      flex-wrap: wrap;
+    }
+
+    .footer-column {
+      flex: 1;
+      min-width: 200px;
+      margin-bottom: 20px;
+    }
+
+    .footer-heading {
+      font-size: 1.2em;
+      margin-bottom: 20px;
+      color: #ecf0f1;
+      font-weight: 600;
+    }
+
+    .footer-links {
+      list-style: none;
+      padding: 0;
+    }
+
+    .footer-link {
+      margin-bottom: 10px;
+    }
+
+    .footer-link a {
+      color: #bdc3c7;
+      text-decoration: none;
+      transition: color 0.3s ease;
+    }
+
+    .footer-link a:hover {
+      color: #3498db;
+    }
+
+    .footer-bottom {
+      text-align: center;
+      padding-top: 20px;
+      border-top: 1px solid #34495e;
+      margin-top: 20px;
+      color: #bdc3c7;
+      font-size: 0.9em;
+    }
+
+    .social-icons {
+      display: flex;
+      gap: 15px;
+      margin-top: 15px;
+    }
+
+    .social-icon {
+      color: white;
+      font-size: 1.5em;
+      transition: color 0.3s ease;
+    }
+
+    .social-icon:hover {
+      color: #3498db;
+    }
+
+    /* Responsive Design */
+    @media (max-width: 768px) {
+      .navbar-container {
+        flex-direction: column;
+      }
+
+      .navbar-menu {
+        margin-top: 15px;
+        flex-wrap: wrap;
+        justify-content: center;
+      }
+
+      .navbar-item {
+        margin: 5px 10px;
+      }
+
+      .footer-container {
+        flex-direction: column;
+      }
+
+      .footer-column {
+        margin-bottom: 30px;
+      }
+
+      .chat-button {
+        padding: 15px 40px;
+        font-size: 20px;
+      }
+    }
+  </style>
+  <link
+    rel="stylesheet"
+    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css"
+  />
+</head>
+<body>
+  <nav class="navbar">
+    <div class="navbar-container">
+      <a href="#" class="navbar-logo">
+        <img src="https://via.placeholder.com/30x30" alt="" />
+        FINAI
+      </a>
+      <ul class="navbar-menu">
+        <li class="navbar-item"><a href="index.html" class="navbar-link">Home</a></li>
+        <li class="navbar-item"><a href="div.html" class="navbar-link">Investments</a></li>
+        <li class="navbar-item"><a href="support.html" class="navbar-link">Help & Support</a></li>
+        <li class="navbar-item"><a href="FAQ.html" class="navbar-link">FAQ's</a></li>
+        <li class="navbar-item">
+          <a href="#" class="navbar-link">Planning</a>
+          <div class="dropdown-content">
+            <a href="#">Retirement</a>
+            <a href="#">Career</a>
+            <a href="#">College</a>
+          </div>
+        </li>
+      </ul>
+    </div>
+  </nav>
+
+  <div class="main-content">
+    <div class="chat-button-container">
+      <button class="chat-button" onclick="openChatbot()">Chat with FinAI</button>
+    </div>
+
+    <div class="container">
+      <h1 class="headline">Money Made Simple—with AI</h1>
+      <p class="subtext">Your personalized, AI-powered guide to smarter budgeting, investing, and financial planning.</p>
+    </div>
+  </div>
+
+  <footer class="footer">
+    <div class="footer-container">
+      <div class="footer-column">
+        <h3 class="footer-heading">FinAI</h3>
+        <p style="color: #bdc3c7;">
+          Your smart financial assistant for better investing decisions.
+        </p>
+        <div class="social-icons">
+          <a href="#" class="social-icon"><i class="fab fa-facebook-f"></i></a>
+          <a href="#" class="social-icon"><i class="fab fa-twitter"></i></a>
+          <a href="#" class="social-icon"><i class="fab fa-linkedin-in"></i></a>
+          <a href="#" class="social-icon"><i class="fab fa-instagram"></i></a>
+        </div>
+      </div>
+      <div class="footer-column">
+        <h3 class="footer-heading">Quick Links</h3>
+        <ul class="footer-links">
+          <li class="footer-link"><a href="#">Home</a></li>
+          <li class="footer-link"><a href="#">Features</a></li>
+          <li class="footer-link"><a href="#">Pricing</a></li>
+          <li class="footer-link"><a href="#">FAQ</a></li>
+        </ul>
+      </div>
+      <div class="footer-column">
+        <h3 class="footer-heading">Legal</h3>
+        <ul class="footer-links">
+          <li class="footer-link"><a href="#">Privacy Policy</a></li>
+          <li class="footer-link"><a href="#">Terms of Service</a></li>
+          <li class="footer-link"><a href="#">Disclosures</a></li>
+          <li class="footer-link"><a href="#">Compliance</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p>&copy; 2023 FinAI. All rights reserved. | SEBI Registered Investment Advisor</p>
+    </div>
+  </footer>
+
+  <script>
+    function openChatbot() {
+      window.open("index1.html", "_blank", "width=500,height=700");
+    }
+  </script>
+</body>
+</html>

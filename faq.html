@@ -1,0 +1,308 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>FAQ – GenAI Financial Assistant</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+  /* Navbar Styles */
+    .navbar {
+      background-color: #2c3e50;
+      color: white;
+      padding: 15px 0;
+      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+    }
+
+    .navbar-container {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 20px;
+    }
+
+    .navbar-logo {
+      font-size: 1.5em;
+      font-weight: bold;
+      color: white;
+      text-decoration: none;
+      display: flex;
+      align-items: center;
+    }
+
+    .navbar-logo img {
+      height: 30px;
+      margin-right: 10px;
+    }
+
+    .navbar-menu {
+      list-style: none;
+      display: flex;
+      margin: 0;
+      padding: 0;
+    }
+
+    .navbar-item {
+      position: relative;
+      margin: 0 15px;
+    }
+
+    .navbar-link {
+      color: white;
+      text-decoration: none;
+      padding: 8px 12px;
+      border-radius: 4px;
+      transition: all 0.3s ease;
+      font-weight: 500;
+      display: inline-block;
+    }
+
+    .navbar-link:hover {
+      background-color: #34495e;
+      color: #f8f9fa;
+    }
+ 
+    /* Dropdown Styles */
+    .dropdown-content {
+      display: none;
+      position: absolute;
+      background-color: #34495e;
+      min-width: 160px;
+      box-shadow: 0px 8px 16px rgba(0, 0, 0, 0.2);
+      z-index: 1001;
+      border-radius: 4px;
+      top: 100%;
+      left: 0;
+    }
+
+    .dropdown-content a {
+      color: white;
+      padding: 10px 16px;
+      text-decoration: none;
+      display: block;
+      transition: background-color 0.3s;
+    }
+
+    .dropdown-content a:hover {
+      background-color: #3e5871;
+    }
+
+    .navbar-item:hover .dropdown-content {
+      display: block;
+    }
+    /* Footer Styles */
+    .footer {
+      background-color: #2c3e50;
+      color: white;
+      padding: 40px 0 20px;
+    }
+
+    .footer-container {
+      display: flex;
+      justify-content: space-between;
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 20px;
+      flex-wrap: wrap;
+    }
+
+    .footer-column {
+      flex: 1;
+      min-width: 200px;
+      margin-bottom: 20px;
+    }
+
+    .footer-heading {
+      font-size: 1.2em;
+      margin-bottom: 20px;
+      color: #ecf0f1;
+      font-weight: 600;
+    }
+
+    .footer-links {
+      list-style: none;
+      padding: 0;
+    }
+
+    .footer-link {
+      margin-bottom: 10px;
+    }
+
+    .footer-link a {
+      color: #bdc3c7;
+      text-decoration: none;
+      transition: color 0.3s ease;
+    }
+
+    .footer-link a:hover {
+      color: #3498db;
+    }
+
+    .footer-bottom {
+      text-align: center;
+      padding-top: 20px;
+      border-top: 1px solid #34495e;
+      margin-top: 20px;
+      color: #bdc3c7;
+      font-size: 0.9em;
+    }
+
+    .social-icons {
+      display: flex;
+      gap: 15px;
+      margin-top: 15px;
+    }
+
+    .social-icon {
+      color: white;
+      font-size: 1.5em;
+      transition: color 0.3s ease;
+    }
+
+    .social-icon:hover {
+      color: #3498db;
+    }
+
+    /* Responsive Design */
+    @media (max-width: 768px) {
+      .navbar-container {
+        flex-direction: column;
+      }
+
+      .navbar-menu {
+        margin-top: 15px;
+        flex-wrap: wrap;
+        justify-content: center;
+      }
+
+      .navbar-item {
+        margin: 5px 10px;
+      }
+
+      .footer-container {
+        flex-direction: column;
+      }
+
+      .footer-column {
+        margin-bottom: 30px;
+      }
+
+      .chat-button {
+        padding: 15px 40px;
+        font-size: 20px;
+      }
+    }
+
+  </style>
+</head>
+<body class="bg-gray-50 text-gray-800">
+  <nav class="navbar">
+    <div class="navbar-container">
+      <a href="#" class="navbar-logo">
+        <img src="https://via.placeholder.com/30x30" alt="" />
+        FinAI
+      </a>
+      <ul class="navbar-menu">
+        <li class="navbar-item"><a href="index.html" class="navbar-link">Home</a></li>
+        <li class="navbar-item"><a href="div.html" class="navbar-link">Investments</a></li>
+        <li class="navbar-item"><a href="support.html" class="navbar-link">Help & Support</a></li>
+        <li class="navbar-item"><a href="FAQ.html" class="navbar-link">FAQ's</a></li>
+        <li class="navbar-item">
+          <a href="#" class="navbar-link">Planning</a>
+          <div class="dropdown-content">
+            <a href="#">Retirement</a>
+            <a href="#">Career</a>
+            <a href="#">College</a>
+          </div>
+        </li>
+      </ul>
+    </div>
+  </nav>
+  <div class="max-w-4xl mx-auto py-12 px-6">
+    <h1 class="text-4xl font-bold mb-6 text-center text-indigo-600">FAQs</h1>
+    <p class="text-center mb-10 text-lg">Frequently Asked Questions about your GenAI-Powered Financial Assistant</p>
+
+    <div class="space-y-4">
+      <!-- FAQ Item -->
+      <details class="bg-white shadow-md rounded-xl p-4">
+        <summary class="cursor-pointer font-semibold text-lg text-indigo-700">Is my financial data safe on this platform?</summary>
+        <p class="mt-2 text-gray-600">Yes, your data is protected using end-to-end encryption and industry-standard security protocols. We also support multi-factor authentication (MFA).</p>
+      </details>
+
+      <details class="bg-white shadow-md rounded-xl p-4">
+        <summary class="cursor-pointer font-semibold text-lg text-indigo-700">How do I reset my password?</summary>
+        <p class="mt-2 text-gray-600">Click on "Forgot Password" on the login page and follow the steps sent to your registered email address.</p>
+      </details>
+
+      <details class="bg-white shadow-md rounded-xl p-4">
+        <summary class="cursor-pointer font-semibold text-lg text-indigo-700">What can the AI assistant help me with?</summary>
+        <p class="mt-2 text-gray-600">The AI assistant can help you track expenses, create budgets, suggest investments, remind you about EMIs, and answer financial questions.</p>
+      </details>
+
+      <details class="bg-white shadow-md rounded-xl p-4">
+        <summary class="cursor-pointer font-semibold text-lg text-indigo-700">Can I set reminders for EMIs or bills?</summary>
+        <p class="mt-2 text-gray-600">Yes! Go to Profile &gt; EMI Reminders to set due dates. You’ll receive notifications via email or the app.</p>
+      </details>
+
+      <details class="bg-white shadow-md rounded-xl p-4">
+        <summary class="cursor-pointer font-semibold text-lg text-indigo-700">Can I use this on my phone?</summary>
+        <p class="mt-2 text-gray-600">Yes! The platform is fully mobile-responsive and works smoothly on smartphones and tablets. A dedicated app is coming soon!</p>
+      </details>
+
+      <details class="bg-white shadow-md rounded-xl p-4">
+        <summary class="cursor-pointer font-semibold text-lg text-indigo-700">Is there a fee to use this assistant?</summary>
+        <p class="mt-2 text-gray-600">Basic features are free. For advanced analytics and investment tools, you can upgrade to our Premium Plan on the Pricing page.</p>
+      </details>
+
+      <!-- Contact Option -->
+      <div class="text-center pt-8">
+        <p class="text-gray-700">Still have questions?</p>
+        <a href="/support" class="inline-block mt-2 px-5 py-2 bg-indigo-600 text-white rounded-full hover:bg-indigo-700 transition">Contact Support</a>
+      </div>
+    </div>
+  </div>
+  <footer class="footer">
+    <div class="footer-container">
+      <div class="footer-column">
+        <h3 class="footer-heading">FinAI</h3>
+        <p style="color: #bdc3c7;">
+          Your smart financial assistant for better investing decisions.
+        </p>
+        <div class="social-icons">
+          <a href="#" class="social-icon"><i class="fab fa-facebook-f"></i></a>
+          <a href="#" class="social-icon"><i class="fab fa-twitter"></i></a>
+          <a href="#" class="social-icon"><i class="fab fa-linkedin-in"></i></a>
+          <a href="#" class="social-icon"><i class="fab fa-instagram"></i></a>
+        </div>
+      </div>
+      <div class="footer-column">
+        <h3 class="footer-heading">Quick Links</h3>
+        <ul class="footer-links">
+          <li class="footer-link"><a href="#">Home</a></li>
+          <li class="footer-link"><a href="#">Features</a></li>
+          <li class="footer-link"><a href="#">Pricing</a></li>
+          <li class="footer-link"><a href="#">FAQ</a></li>
+        </ul>
+      </div>
+      <div class="footer-column">
+        <h3 class="footer-heading">Legal</h3>
+        <ul class="footer-links">
+          <li class="footer-link"><a href="#">Privacy Policy</a></li>
+          <li class="footer-link"><a href="#">Terms of Service</a></li>
+          <li class="footer-link"><a href="#">Disclosures</a></li>
+          <li class="footer-link"><a href="#">Compliance</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p>&copy; 2023 FinAI. All rights reserved. | SEBI Registered Investment Advisor</p>
+    </div>
+  </footer>
+
+</body>
+</html>

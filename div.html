@@ -1,0 +1,438 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Investment Portfolio</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #f5f7fa;
+            margin: 0;
+            padding: 0;
+            color: #333;
+        }
+        
+        h1 {
+            text-align: center;
+            color: #2c3e50;
+            margin-bottom: 30px;
+            padding-top: 20px;
+        }
+        
+        .investment-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 20px;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        
+        .investment-card {
+            background-color: white;
+            border-radius: 10px;
+            padding: 25px;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+            transition: all 0.3s ease;
+            cursor: pointer;
+            border-left: 5px solid #3498db;
+            min-height: 200px;
+        }
+        
+        .investment-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0,0,0,0.15);
+            border-left: 5px solid #e74c3c;
+        }
+        
+        .investment-card h2 {
+            color: #3498db;
+            margin-top: 0;
+            margin-bottom: 15px;
+        }
+        
+        .investment-card p {
+            color: #7f8c8d;
+            margin-bottom: 15px;
+        }
+        
+        .investment-card .icon {
+            font-size: 40px;
+            margin-bottom: 15px;
+            color: #3498db;
+        }
+        
+        /* Different colors for each investment type */
+        .stocks { border-left-color: #3498db; }
+        .stocks:hover { border-left-color: #e74c3c; }
+        .stocks .icon { color: #3498db; }
+        
+        .real-estate { border-left-color: #2ecc71; }
+        .real-estate:hover { border-left-color: #e74c3c; }
+        .real-estate .icon { color: #2ecc71; }
+        
+        .crypto { border-left-color: #f39c12; }
+        .crypto:hover { border-left-color: #e74c3c; }
+        .crypto .icon { color: #f39c12; }
+        
+        .bonds { border-left-color: #9b59b6; }
+        .bonds:hover { border-left-color: #e74c3c; }
+        .bonds .icon { color: #9b59b6; }
+        
+        .commodities { border-left-color: #1abc9c; }
+        .commodities:hover { border-left-color: #e74c3c; }
+        .commodities .icon { color: #1abc9c; }
+        
+        .funds { border-left-color: #e67e22; }
+        .funds:hover { border-left-color: #e74c3c; }
+        .funds .icon { color: #e67e22; }
+        
+        /* Global Styles */
+        body {
+            margin: 0;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background-color: #f8f9fa;
+        }
+        
+        /* Navbar Styles */
+        .navbar {
+            background-color: #2c3e50;
+            color: white;
+            padding: 15px 0;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+        
+        .navbar-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+         
+        .navbar-logo {
+            font-size: 1.5em;
+            font-weight: bold;
+            color: white;
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+        }
+        
+        .navbar-logo img {
+            height: 30px;
+            margin-right: 10px;
+        }
+        
+        .navbar-menu {
+            list-style: none;
+            display: flex;
+            margin: 0;
+            padding: 0;
+        }
+         
+        .navbar-item {
+            margin: 0 15px;
+            position: relative;
+        }
+        
+        .navbar-link {
+            color: white;
+            text-decoration: none;
+            padding: 8px 12px;
+            border-radius: 4px;
+            transition: all 0.3s ease;
+            font-weight: 500;
+        } 
+        
+        .navbar-link:hover {
+            background-color: #34495e;
+            color: #f8f9fa;
+        } 
+        
+        /* Dropdown Styles */
+        .dropdown-content {
+            display: none;
+            position: absolute;
+            background-color: #34495e;
+            min-width: 160px;
+            box-shadow: 0px 8px 16px rgba(0, 0, 0, 0.2);
+            z-index: 1001;
+            border-radius: 4px;
+            top: 100%;
+            left: 0;
+        }
+        
+        .dropdown-content a {
+            color: white;
+            padding: 10px 16px;
+            text-decoration: none;
+            display: block;
+            transition: background-color 0.3s;
+        }
+        
+        .dropdown-content a:hover {
+            background-color: #3e5871;
+        }
+        
+        .navbar-item:hover .dropdown-content {
+            display: block;
+        }
+        
+        /* Main Content Styles */
+        .main-content {
+            min-height: calc(100vh - 180px);
+            padding: 40px 20px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        
+        /* Chat Button Styles */
+        .chat-button-container {
+            text-align: center;
+            margin: 50px 0;
+        }
+        
+        .chat-button {
+            background-color: #3498db;
+            color: white;
+            border: none;
+            padding: 20px 60px;
+            font-size: 24px;
+            border-radius: 50px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(52, 152, 219, 0.3);
+            font-weight: 600;
+        }
+        
+        .chat-button:hover {
+            background-color: #2980b9;
+            transform: translateY(-3px);
+            box-shadow: 0 6px 20px rgba(52, 152, 219, 0.4);
+        }
+         
+        /* Footer Styles */
+        .footer {
+            background-color: #2c3e50;
+            color: white;
+            padding: 40px 0 20px;
+        }
+        
+        .footer-container {
+            display: flex;
+            justify-content: space-between;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+            flex-wrap: wrap;
+        }
+        
+        .footer-column {
+            flex: 1;
+            min-width: 200px;
+            margin-bottom: 20px;
+            padding: 0 15px;
+        }
+        
+        .footer-heading {
+            font-size: 1.2em;
+            margin-bottom: 20px;
+            color: #ecf0f1;
+        }
+        
+        .footer-links {
+            list-style: none;
+            padding: 0;
+        }
+         
+        .footer-link {
+            margin-bottom: 10px;
+        }
+        
+        .footer-link a {
+            color: #bdc3c7;
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+        
+        .footer-link a:hover {
+            color: #3498db;
+        }
+        
+        .footer-bottom {
+            text-align: center;
+            padding-top: 20px;
+            border-top: 1px solid #34495e;
+            margin-top: 20px;
+            color: #bdc3c7;
+            font-size: 0.9em;
+            width: 100%;
+        }
+          
+        .social-icons {
+            display: flex;
+            gap: 15px;
+            margin-top: 15px;
+        }
+        
+        .social-icon {
+            color: white;
+            font-size: 1.5em;
+            transition: color 0.3s ease;
+        }
+        
+        .social-icon:hover {
+            color: #3498db;
+        }
+          
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .navbar-container {
+                flex-direction: column;
+            }
+            
+            .navbar-menu {
+                margin-top: 15px;
+                flex-wrap: wrap;
+                justify-content: center;
+            }
+            
+            .navbar-item {
+                margin: 5px 10px;
+            }
+            
+            .footer-container {
+                flex-direction: column;
+            }
+            
+            .footer-column {
+                margin-bottom: 30px;
+            }
+            
+            .investment-container {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <nav class="navbar">
+        <div class="navbar-container">
+            <a href="#" class="navbar-logo">
+                <img src="https://via.placeholder.com/30x30" alt="FinAI Logo">
+                FinAI
+            </a>
+            <ul class="navbar-menu">
+                <li class="navbar-item"><a href="index.html" class="navbar-link">Home</a></li>
+                <li class="navbar-item"><a href="div.html" class="navbar-link">Investments</a></li>
+                <li class="navbar-item"><a href="support.html" class="navbar-link">Help & Support</a></li>
+                <li class="navbar-item"><a href="FAQ.html" class="navbar-link">FAQ's</a></li>
+                <li class="navbar-item">
+                    <a href="#" class="navbar-link">Planning</a>
+                    <div class="dropdown-content">
+                        <a href="#">Retirement</a>
+                        <a href="#">Career</a>
+                        <a href="#">College</a>
+                    </div>
+                </li>
+            </ul>
+        </div>
+    </nav>
+    
+    <h1>Investment Opportunities</h1>
+    
+    <div class="investment-container">
+        <div class="investment-card stocks" onclick="openInvestmentPage('stocks')">
+            <div class="icon">📈</div>
+            <h2>Stock Market</h2>
+            <p>Invest in shares of publicly traded companies. Potential for high returns with moderate to high risk.</p>
+        </div>
+        
+        <div class="investment-card real-estate">
+            <div class="icon">🏠</div>
+            <h2><a href="https://www.sothebysrealty.com/eng?gad_source=1&gclid=Cj0KCQjwqcO_BhDaARIsACz62vO4sXbw4rG8ZNr1fqoRaQlqUHTcvC_vNRQfRBioEkVMBBsMUuaKGbgaAhs_EALw_wcB&gclsrc=aw.ds" style="text-decoration: none; color: inherit;">Real Estate</a></h2>
+            <p>Invest in physical properties or REITs. Provides steady income and long-term appreciation.</p>
+        </div>
+        
+        <div class="investment-card crypto">
+            <div class="icon">₿</div>
+            <h2><a href="https://wazirx.com/" style="text-decoration: none; color: inherit;">Cryptocurrency</a></h2>
+            <p>Digital currency investments like Bitcoin and Ethereum. High risk but potential for high rewards.</p>
+        </div>
+        
+        <div class="investment-card bonds">
+            <div class="icon">📊</div>
+            <h2><a href="https://www.angelone.in/sem/open-demat-account?gclsrc=aw.ds&&utm_source=google&utm_medium=cpc&utm_campaign=Sitelink_AngelEye_Search-Demat_Account_Charges_Keywords-Core-B2C-Desktop-BMM&network=g&keyword=&matchtype=&creative=736099339859&device=c&devicemodel=&utm_content=Demat_A/C_Online&gad_source=1&gclid=Cj0KCQjwqcO_BhDaARIsACz62vPPctOj26gFSzIXxZKqpVQDgwrNWDPbYKUrSbBdUzVYT24BlYh5ZdoaAt0TEALw_wcB" style="text-decoration: none; color: inherit;">Mutual Funds</a></h2>
+            <p>Mutual funds offer diversified, professionally managed investments for long-term wealth growth.</p>
+        </div>
+        
+        <div class="investment-card commodities">
+            <div class="icon">⛏️</div>
+            <h2><a href="https://tradingeconomics.com/commodities" style="text-decoration: none; color: inherit;">Commodities</a></h2>
+            <p>Invest in physical goods like gold, oil, or agricultural products. Hedge against inflation.</p>
+        </div>
+        
+        <div class="investment-card funds" onclick="openInvestmentPage('funds')">
+            <div class="icon">📦</div>
+            <h2>Funds & ETFs</h2>
+            <p>Diversified portfolios managed by professionals. Lower risk through diversification.</p>
+        </div>
+    </div>
+
+    <footer class="footer">
+        <div class="footer-container">
+            <div class="footer-column">
+                <h3 class="footer-heading">FinAI</h3>
+                <p style="color: #bdc3c7;">Your smart financial assistant for better investing decisions.</p>
+                <div class="social-icons">
+                    <a href="#" class="social-icon"><i class="fab fa-facebook-f"></i></a>
+                    <a href="#" class="social-icon"><i class="fab fa-twitter"></i></a>
+                    <a href="#" class="social-icon"><i class="fab fa-linkedin-in"></i></a>
+                    <a href="#" class="social-icon"><i class="fab fa-instagram"></i></a>
+                </div>
+            </div>
+             
+            <div class="footer-column">
+                <h3 class="footer-heading">Quick Links</h3>
+                <ul class="footer-links">
+                    <li class="footer-link"><a href="#">Home</a></li>
+                    <li class="footer-link"><a href="#">Features</a></li>
+                    <li class="footer-link"><a href="#">Pricing</a></li>
+                    <li class="footer-link"><a href="#">FAQ</a></li>
+                </ul>
+            </div>
+            
+            <div class="footer-column">
+                <h3 class="footer-heading">Legal</h3>
+                <ul class="footer-links">
+                    <li class="footer-link"><a href="#">Privacy Policy</a></li>
+                    <li class="footer-link"><a href="#">Terms of Service</a></li>
+                    <li class="footer-link"><a href="#">Disclosures</a></li>
+                    <li class="footer-link"><a href="#">Compliance</a></li>
+                </ul>
+            </div>
+        </div>
+        
+        <div class="footer-bottom">
+            <p>&copy; 2023 FinAI. All rights reserved. | SEBI Registered Investment Advisor</p>
+        </div>
+    </footer>
+
+    <script>
+        function openInvestmentPage(type) {
+            // You can implement navigation logic here
+            console.log("Opening investment page for:", type);
+            // window.location.href = type + '.html';
+        }
+    </script>
+</body>
+</html>
